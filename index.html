@@ -1,11 +1,135 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>SPWLA Argentina</title>
+  <meta charset="utf-8" />
+  <title>SPWLA Argentina - Capítulo Estudiantil</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ------- RESET / TIPOS ------- */
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Montserrat',sans-serif;background:#f7f9fb;color:#1f2d3d;line-height:1.5}
+    a{color:inherit}
+
+    /* ------- NAV ------- */
+    nav{position:sticky;top:0;background:linear-gradient(90deg,#013a63,#00558f);padding:14px;z-index:200;display:flex;justify-content:center;gap:30px}
+    nav a{color:#fff;text-decoration:none;font-weight:600;transition:color .2s}
+    nav a:hover{color:#ffd34d}
+
+    /* ------- HERO / CARRUSEL (fallback simple) ------- */
+    .hero{
+      position:relative;height:78vh;display:flex;align-items:center;justify-content:center;text-align:center;color:white;
+      background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.25));
+      overflow:hidden;
+    }
+    .hero .bg{position:absolute;inset:0;background:url('img/foto_portada1.jpg') center/cover no-repeat;filter:brightness(0.55);z-index:0}
+    .hero .container{position:relative;z-index:2;padding:0 20px;max-width:1100px}
+    .hero h1{font-size:3.2rem;letter-spacing:.5px;margin-bottom:10px;text-shadow:0 8px 24px rgba(0,0,0,.45)}
+    .hero p.lead{font-size:1.15rem;max-width:920px;margin:14px auto 0;color:#f1f5f9;text-shadow:0 6px 18px rgba(0,0,0,.35)}
+    .hero .cta{margin-top:20px}
+    .btn{display:inline-block;background:#ffd34d;color:#013a63;font-weight:700;padding:12px 22px;border-radius:12px;text-decoration:none;box-shadow:0 8px 20px rgba(1,54,99,0.18)}
+    .btn:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(1,54,99,0.24)}
+
+    /* ------- SECCIONES ------- */
+    section{padding:72px 8%}
+    h2{font-size:2rem;color:#013a63;text-align:center;margin-bottom:28px}
+
+    /* ------- CONTENEDOR DE CARDS ------- */
+    .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px}
+
+    .card{
+      background:white;border-radius:14px;overflow:hidden;box-shadow:0 12px 30px rgba(4,23,42,0.08);transition:transform .25s,box-shadow .25s;
+    }
+    .card:hover{transform:translateY(-10px);box-shadow:0 22px 46px rgba(4,23,42,0.12)}
+    .card img{width:100%;height:180px;object-fit:cover;display:block}
+    .card .body{padding:18px}
+    .card h3{color:#01405e;margin-bottom:8px;font-size:1.15rem}
+    .card p{font-size:.96rem;color:#374151;margin-bottom:12px}
+    .card a.read{display:inline-block;padding:8px 14px;background:#01405e;color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
+    .card a.read:hover{background:#003450}
+
+    /* ------- CONTACTO ------- */
+    .contact-list{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+    .chip{padding:10px 14px;background:#fff;border-radius:999px;box-shadow:0 6px 18px rgba(1,54,99,0.06);font-weight:600;color:#01405e}
+
+    /* ------- FOOTER ------- */
+    footer{background:#013a63;color:#fff;padding:28px 8%;text-align:center}
+    footer a{color:#ffd34d;text-decoration:none}
+
+    /* ------- RESPONSIVE ------- */
+    @media(max-width:720px){
+      .hero h1{font-size:2rem}
+      .hero p.lead{font-size:.98rem}
+      nav{padding:10px}
+      section{padding:48px 6%}
+    }
+  </style>
 </head>
 <body>
-<h1>Hola, esta es mi página deluxe!</h1>
-<p>Estamos empezando desde cero 😎</p>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#general-news">Noticias</a>
+    <a href="#events">Actividades</a>
+    <a href="#revistas">Revistas</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <!-- HERO: siempre visible aunque las secciones tarden en cargar -->
+  <header class="hero" id="top">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="container">
+      <h1>SPWLA Argentina</h1>
+      <p class="lead">Capítulo Estudiantil — formando geocientistas comprometidos con la innovación, el aprendizaje y la comunidad profesional.</p>
+      <div class="cta">
+        <a class="btn" href="#events">Conocenos</a>
+      </div>
+      <p style="margin-top:14px;font-size:.95rem;color:rgba(241,245,249,.9)">Seguinos: <a href="https://www.instagram.com/spwlaarg/" target="_blank" rel="noopener" style="color:#ffd34d;text-decoration:underline">Instagram @spwlaarg</a> · <a href="https://www.linkedin.com/company/spwla-argentina/" target="_blank" rel="noopener" style="color:#ffd34d;text-decoration:underline">LinkedIn</a></p>
+    </div>
+  </header>
+
+  <!-- PLACEHOLDER donde vamos a inyectar cada seccion desde files en /sections/ -->
+  <main id="main-content">
+    <!-- Si no cargan las secciones, mostramos un loader simple -->
+    <section style="text-align:center;padding:48px 8%"><em>Cargando contenido…</em></section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 SPWLA Argentina - Capítulo Estudiantil </p>
+    <p style="margin-top:8px">Email: <a href="mailto:spwla.arg.sc@gmail.com">spwla.arg.sc@gmail.com</a></p>
+  </footer>
+
+  <script>
+    // Lista de archivos de sección (si los creás, la página los insertará)
+    const sections = [
+      { id: 'general-news', file: 'sections/news.html' },
+      { id: 'events', file: 'sections/events.html' },
+      { id: 'revistas', file: 'sections/revistas.html' },
+      { id: 'contacto', file: 'sections/contacto.html' }
+    ];
+
+    const main = document.getElementById('main-content');
+
+    async function loadSections(){
+      main.innerHTML = ''; // limpiar
+      for(const s of sections){
+        try{
+          const resp = await fetch(s.file);
+          if(!resp.ok) throw new Error('no existe');
+          const html = await resp.text();
+          // Insertamos la sección tal cual
+          const wrapper = document.createElement('div');
+          wrapper.innerHTML = html;
+          main.appendChild(wrapper);
+        }catch(e){
+          // si no existe el archivo lo ignoramos (esto permite subir de a una sección)
+          console.log('Sección faltante (puede ser normal):', s.file);
+        }
+      }
+    }
+
+    // Ejecutar la carga
+    loadSections();
+  </script>
 </body>
 </html>

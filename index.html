@@ -7,19 +7,58 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root { --azul: #002D5A; --celeste: #00d4ff; --gris: #f4f7f6; --blanco: #ffffff; }
+        
         body { font-family: 'Open Sans', sans-serif; margin: 0; background: var(--gris); color: #333; }
-        header { background: var(--azul); color: var(--blanco); padding: 3rem 1rem; text-align: center; border-bottom: 5px solid var(--celeste); }
-        nav { background: var(--blanco); padding: 1rem; text-align: center; position: sticky; top: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; }
-        nav a { margin: 0 15px; text-decoration: none; color: var(--azul); font-weight: bold; text-transform: uppercase; font-size: 0.9rem; }
-        .hero { background: linear-gradient(rgba(0,45,90,0.8), rgba(0,45,90,0.8)), url('https://www.spwla.org/images/SPWLA/Slider/Slide1.jpg'); background-size: cover; color: white; padding: 5rem 1rem; text-align: center; }
-        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1.5rem; }
-        .seccion { background: var(--blanco); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h2 { color: var(--azul); font-family: 'Montserrat', sans-serif; border-left: 5px solid var(--celeste); padding-left: 15px; }
+        
+        header { background: var(--azul); color: var(--blanco); padding: 2rem 1rem; text-align: center; border-bottom: 5px solid var(--celeste); }
+
+        /* Estilo del Menú de Solapas */
+        nav { 
+            background: var(--blanco); 
+            display: flex; 
+            justify-content: center; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 1rem 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--azul);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border-bottom: 3px solid transparent;
+            transition: 0.3s;
+        }
+
+        .tab-button:hover { color: var(--celeste); }
+
+        /* Clase para la solapa activa */
+        .tab-button.active {
+            border-bottom: 3px solid var(--celeste);
+            color: var(--celeste);
+        }
+
+        .container { max-width: 1000px; margin: 2rem auto; padding: 0 1.5rem; min-height: 60vh; }
+
+        /* Ocultar secciones por defecto */
+        .tab-content { display: none; background: var(--blanco); padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        
+        /* Mostrar solo la activa */
+        .tab-content.active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        h2 { color: var(--azul); font-family: 'Montserrat', sans-serif; margin-top: 0; }
         .grid-revistas { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-        .revista { border: 1px solid #eee; padding: 1.5rem; border-radius: 8px; text-align: center; transition: 0.3s; }
-        .revista:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .revista { border: 1px solid #eee; padding: 1.5rem; border-radius: 8px; text-align: center; }
         .btn { background: var(--azul); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px; font-weight: 600; }
-        .btn:hover { background: var(--celeste); color: var(--azul); }
+        
         footer { background: var(--azul); color: white; text-align: center; padding: 2rem; margin-top: 4rem; }
     </style>
 </head>
@@ -31,52 +70,74 @@
 </header>
 
 <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#nosotros">Nosotros</a>
-    <a href="#revistas">Revistas</a>
-    <a href="#eventos">Eventos</a>
+    <button class="tab-button active" onclick="openTab(event, 'inicio')">Inicio</button>
+    <button class="tab-button" onclick="openTab(event, 'nosotros')">Nosotros</button>
+    <button class="tab-button" onclick="openTab(event, 'revistas')">Revistas</button>
+    <button class="tab-button" onclick="openTab(event, 'eventos')">Eventos</button>
 </nav>
 
-<section class="hero" id="inicio">
-    <h2>Bienvenidos al Capítulo Estudiantil</h2>
-    <p>Promoviendo la ciencia de la petrofísica y el perfilaje de pozos en Argentina.</p>
-</section>
-
 <div class="container">
-    <section class="seccion" id="nosotros">
-        <h2>Sobre Nosotros</h2>
-        <p>Somos un grupo de estudiantes dedicados a conectar la universidad con la industria energética. Formamos parte de la red global de la <strong>Society of Petrophysicists and Well Log Analysts</strong>.</p>
-    </section>
+    <div id="inicio" class="tab-content active">
+        <h2>Bienvenidos</h2>
+        <p>Este es el sitio oficial del capítulo estudiantil SPWLA Argentina. Explora nuestras solapas para conocer más sobre nuestras actividades y publicaciones técnicas.</p>
+        <img src="https://www.spwla.org/images/SPWLA/Slider/Slide1.jpg" alt="Petrofísica" style="width:100%; border-radius:10px; margin-top:1rem;">
+    </div>
 
-    <section class="seccion" id="revistas">
+    <div id="nosotros" class="tab-content">
+        <h2>Sobre Nosotros</h2>
+        <p>Somos una organización académica dedicada a la difusión de la petrofísica y el perfilaje de pozos en la comunidad estudiantil de Argentina.</p>
+        <h3>Misión</h3>
+        <p>Brindar herramientas técnicas y redes de contacto a los futuros profesionales del sector energético.</p>
+    </div>
+
+    <div id="revistas" class="tab-content">
         <h2>Revistas Trimestrales</h2>
         <div class="grid-revistas">
             <div class="revista">
                 <h3>Edición Enero 2026</h3>
-                <p>Resumen de actividades y artículos técnicos.</p>
-                <a href="#" class="btn">Leer Revista</a>
+                <a href="#" class="btn">Descargar PDF</a>
             </div>
             <div class="revista">
                 <h3>Edición Octubre 2025</h3>
-                <p>Especial: Perfilaje en Vaca Muerta.</p>
-                <a href="#" class="btn">Leer Revista</a>
+                <a href="#" class="btn">Descargar PDF</a>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="seccion" id="eventos">
-        <h2>Próximos Eventos</h2>
+    <div id="eventos" class="tab-content">
+        <h2>Eventos Futuros</h2>
         <ul>
-            <li><strong>Marzo 2026:</strong> Webinar de Introducción al Perfilaje Eléctrico.</li>
-            <li><strong>Abril 2026:</strong> Reunión mensual del capítulo.</li>
+            <li>Webinar: Interpretación de Perfiles de Resistividad (Marzo 2026)</li>
+            <li>Charla: Desafíos en Reservorios No Convencionales (Abril 2026)</li>
         </ul>
-    </section>
+    </div>
 </div>
 
 <footer>
     <p>&copy; 2026 SPWLA Argentina Student Chapter</p>
-    <p>Contacto: tu-email@ejemplo.com</p>
 </footer>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        
+        // Ocultar todos los contenidos de solapa
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.remove("active");
+        }
+
+        // Quitar la clase "active" de todos los botones
+        tablinks = document.getElementsByClassName("tab-button");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+
+        // Mostrar la solapa actual y añadir clase activa al botón
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+</script>
 
 </body>
 </html>

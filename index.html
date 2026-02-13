@@ -1,120 +1,219 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SPWLA Argentina Student Chapter</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f5fff5; /* verde muy claro de fondo */
-      color: #0b3d0b; /* verde oscuro para texto */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPWLA Argentina Student Chapter</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-    header {
-      background-color: #145214; /* verde más fuerte */
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
+    <style>
+        :root {
+            --primary: #002D5A; /* Azul SPWLA oficial */
+            --secondary: #0056b3;
+            --accent: #00d4ff;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+            --white: #ffffff;
+        }
 
-    nav {
-      background-color: #198c19; /* verde intermedio */
-      display: flex;
-      justify-content: center;
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-    }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            scroll-behavior: smooth;
+        }
 
-    nav ul li {
-      position: relative;
-    }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; }
 
-    nav ul li a {
-      display: block;
-      padding: 1rem;
-      color: white;
-      text-decoration: none;
-    }
+        /* --- NAVEGACIÓN --- */
+        nav {
+            background: rgba(0, 45, 90, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
 
-    nav ul li a:hover {
-      background-color: #0f660f;
-    }
+        .logo { color: var(--white); font-size: 1.4rem; letter-spacing: 1px; }
+        .logo span { color: var(--accent); }
 
-    /* Estilo para submenús */
-    nav ul li ul {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #198c19;
-      min-width: 180px;
-      z-index: 1000;
-    }
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 2rem; }
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        nav ul li a:hover { color: var(--accent); }
 
-    nav ul li ul li a {
-      padding: 0.8rem;
-    }
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(135deg, rgba(0,45,90,0.9) 0%, rgba(0,86,179,0.7) 100%), 
+                        url('https://images.unsplash.com/photo-1464851739410-547c15cbed81?auto=format&fit=crop&q=80&w=1500'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 10%;
+        }
 
-    nav ul li:hover ul {
-      display: block;
-    }
+        .hero h2 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.3); }
+        .hero p { font-size: 1.2rem; max-width: 700px; margin-bottom: 2rem; opacity: 0.9; }
 
-    main {
-      padding: 2rem;
-      text-align: center;
-    }
+        /* --- SECCIONES COMUNES --- */
+        section { padding: 5rem 10%; }
+        .section-title { text-align: center; margin-bottom: 3rem; color: var(--primary); font-size: 2rem; }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 4px; background: var(--accent); margin: 10px auto;
+        }
 
-    footer {
-      background-color: #145214;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-  </style>
+        /* --- REVISTAS (Cards) --- */
+        .grid-revistas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .revista-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .revista-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        
+        .revista-img { height: 200px; background: var(--primary); display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; }
+
+        .revista-info { padding: 1.5rem; }
+        .revista-info h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .btn-descarga {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            transition: 0.3s;
+        }
+        .btn-descarga:hover { background: var(--accent); color: var(--primary); font-weight: bold; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 10% 1rem;
+            text-align: center;
+        }
+
+        .social-links { margin: 1.5rem 0; }
+        .social-links a { color: var(--white); font-size: 1.5rem; margin: 0 10px; transition: 0.3s; }
+        .social-links a:hover { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; } /* Simplificación para móvil */
+            .hero h2 { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>SPWLA Argentina Student Chapter</h1>
-  </header>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Inicio</a></li>
-      <li>
-        <a href="#">Revistas</a>
+    <nav>
+        <div class="logo">SPWLA <span>ARGENTINA</span></div>
         <ul>
-          <li><a href="revista_2025_01.html">Revista Enero 2025</a></li>
-          <li><a href="revista_2025_03.html">Revista Marzo 2025</a></li>
-          <li><a href="revista_2025_05.html">Revista Mayo 2025</a></li>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#revistas">Revistas</a></li>
+            <li><a href="#eventos">Eventos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
         </ul>
-      </li>
-      <li>
-        <a href="#">Actividades</a>
-        <ul>
-          <li><a href="actividades_pasadas.html">Pasadas</a></li>
-          <li><a href="actividades_futuras.html">Futuras</a></li>
-        </ul>
-      </li>
-      <li><a href="contacto.html">Contacto</a></li>
-    </ul>
-  </nav>
+    </nav>
 
-  <main>
-    <h2>Bienvenidos</h2>
-    <p>Este es el sitio oficial del capítulo estudiantil SPWLA Argentina. Aquí encontrarás nuestras actividades, publicaciones y novedades.</p>
-  </main>
+    <section class="hero" id="inicio">
+        <h2>Impulsando la Petrofísica en Argentina</h2>
+        <p>Capítulo estudiantil dedicado a la excelencia en el análisis de perfiles de pozos y evaluación de formaciones.</p>
+        <a href="#revistas" class="btn-descarga" style="padding: 1rem 2rem; font-size: 1rem;">Ver Publicaciones</a>
+    </section>
 
-  <footer>
-    <p>&copy; 2025 SPWLA Argentina Student Chapter</p>
-  </footer>
+    <section id="nosotros">
+        <h2 class="section-title">Quiénes Somos</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto;">Somos una comunidad académica y profesional formada por estudiantes de ingeniería y geociencias. Buscamos conectar el talento universitario con los desafíos actuales de la industria energética argentina.</p>
+    </section>
+
+    <section id="revistas" style="background: #f0f4f8;">
+        <h2 class="section-title">Revistas Trimestrales</h2>
+        <div class="grid-revistas">
+            <div class="revista-card">
+                <div class="revista-img">📄</div>
+                <div class="revista-info">
+                    <h3>Edición Mayo 2026</h3>
+                    <p>Análisis de reservorios no convencionales y nuevas tecnologías.</p>
+                    <a href="#" class="btn-descarga">Descargar PDF</a>
+                </div>
+            </div>
+            <div class="revista-card">
+                <div class="revista-img">📄</div>
+                <div class="revista-info">
+                    <h3>Edición Marzo 2026</h3>
+                    <p>Especial: Perfilaje en pozos horizontales.</p>
+                    <a href="#" class="btn-descarga">Descargar PDF</a>
+                </div>
+            </div>
+            <div class="revista-card">
+                <div class="revista-img">📄</div>
+                <div class="revista-info">
+                    <h3>Edición Enero 2026</h3>
+                    <p>Resumen anual de actividades y eventos académicos.</p>
+                    <a href="#" class="btn-descarga">Descargar PDF</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="eventos">
+        <h2 class="section-title">Próximos Eventos</h2>
+        <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+            <ul style="list-style: none;">
+                <li style="padding: 1rem 0; border-bottom: 1px solid #eee;">
+                    <strong>25 Abr:</strong> Webinar - Introducción a la Interpretación Petro-física básica.
+                </li>
+                <li style="padding: 1rem 0; border-bottom: 1px solid #eee;">
+                    <strong>10 May:</strong> Visita técnica a laboratorios de geología.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <h3>SPWLA Argentina Student Chapter</h3>
+        <p>Conectando el futuro de la industria.</p>
+        <div class="social-links">
+            <a href="#">LinkedIn</a>
+            <a href="#">Instagram</a>
+            <a href="#">Twitter</a>
+        </div>
+        <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 2rem;">&copy; 2026 SPWLA Argentina - Diseñado para el avance de la ciencia.</p>
+    </footer>
+
 </body>
 </html>
